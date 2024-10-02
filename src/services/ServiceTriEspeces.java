@@ -1,7 +1,8 @@
 package services;
 
 import java.util.ArrayList;
-
+import java.util.Collection;
+import java.util.Collections;
 
 import models.EspeceDetail;
 
@@ -16,17 +17,11 @@ public class ServiceTriEspeces {
      * @return une nouvelle liste des espèces triées
      */
     public ArrayList<EspeceDetail> getEspecesTrieesParNomCommun(ArrayList<EspeceDetail> lstEspeceDetails) {
-        //
-        //               )        (                 ) (           (         (
-        //            ( /(   *   ))\ )        (  ( /( )\ )        )\ )  (   )\ )
-        //      (   ( )\())` )  /(()/((       )\ )\()|()/(  (    (()/(  )\ (()/(
-        //      )\  )((_)\  ( )(_))(_))\    (((_|(_)\ /(_)) )\    /(_)|((_) /(_))
-        //     ((_)((_)((_)(_(_()|_))((_)   )\___ ((_|_))_ ((_)  (_)) )\___(_))
-        //     __   _____ _____ ___ ___    ___ ___  ___  ___   ___ ___ ___   _
-        //     \ \ / / _ \_   _| _ \ __|  / __/ _ \|   \| __| |_ _/ __|_ _| | |
-        //      \ V / (_) || | |   / _|  | (_| (_) | |) | _|   | | (__ | |  |_|
-        //       \_/ \___/ |_| |_|_\___|  \___\___/|___/|___| |___\___|___| (_)
-        //
+        ArrayList<EspeceDetail> resultat = new ArrayList<>();
+        resultat.addAll(lstEspeceDetails);
+        Collections.sort(resultat);
+
+        return resultat;
     }
 
     /**
@@ -39,17 +34,11 @@ public class ServiceTriEspeces {
      * @return une nouvelle liste des espèces triées
      */
     public ArrayList<EspeceDetail> getEspecesTrieesParNomScientifique(ArrayList<EspeceDetail> lstEspeceDetails) {
-        //
-        //               )        (                 ) (           (         (
-        //            ( /(   *   ))\ )        (  ( /( )\ )        )\ )  (   )\ )
-        //      (   ( )\())` )  /(()/((       )\ )\()|()/(  (    (()/(  )\ (()/(
-        //      )\  )((_)\  ( )(_))(_))\    (((_|(_)\ /(_)) )\    /(_)|((_) /(_))
-        //     ((_)((_)((_)(_(_()|_))((_)   )\___ ((_|_))_ ((_)  (_)) )\___(_))
-        //     __   _____ _____ ___ ___    ___ ___  ___  ___   ___ ___ ___   _
-        //     \ \ / / _ \_   _| _ \ __|  / __/ _ \|   \| __| |_ _/ __|_ _| | |
-        //      \ V / (_) || | |   / _|  | (_| (_) | |) | _|   | | (__ | |  |_|
-        //       \_/ \___/ |_| |_|_\___|  \___\___/|___/|___| |___\___|___| (_)
-        //
+        ArrayList<EspeceDetail> resultat = new ArrayList<>();
+        resultat.addAll(lstEspeceDetails);
+        Collections.sort(resultat);
+
+        return resultat;
     }
 
     /**
@@ -61,15 +50,10 @@ public class ServiceTriEspeces {
      * @return une nouvelle liste des espèces triées
      */
     public ArrayList<EspeceDetail> getEspecesTrieesParPonte(ArrayList<EspeceDetail> lstEspeceDetails) {
-        //
-        //               )        (                 ) (           (         (
-        //            ( /(   *   ))\ )        (  ( /( )\ )        )\ )  (   )\ )
-        //      (   ( )\())` )  /(()/((       )\ )\()|()/(  (    (()/(  )\ (()/(
-        //      )\  )((_)\  ( )(_))(_))\    (((_|(_)\ /(_)) )\    /(_)|((_) /(_))
-        //     ((_)((_)((_)(_(_()|_))((_)   )\___ ((_|_))_ ((_)  (_)) )\___(_))
-        //     __   _____ _____ ___ ___    ___ ___  ___  ___   ___ ___ ___   _
-        //     \ \ / / _ \_   _| _ \ __|  / __/ _ \|   \| __| |_ _/ __|_ _| | |
-        //      \ V / (_) || | |   / _|  | (_| (_) | |) | _|   | | (__ | |  |_|
-        //       \_/ \___/ |_| |_|_\___|  \___\___/|___/|___| |___\___|___| (_)
-        //
+        ArrayList<EspeceDetail> resultat = new ArrayList<>();
+        resultat.addAll(lstEspeceDetails);
+        Collections.sort(resultat);
+
+        return resultat;
+    }
 }

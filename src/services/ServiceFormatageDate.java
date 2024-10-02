@@ -1,6 +1,7 @@
 package services;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 public class ServiceFormatageDate {
@@ -14,16 +15,8 @@ public class ServiceFormatageDate {
      * @return la date formatée
      */
     public String formaterDate(LocalDate date) {
-        //
-        //               )        (                 ) (           (         (
-        //            ( /(   *   ))\ )        (  ( /( )\ )        )\ )  (   )\ )
-        //      (   ( )\())` )  /(()/((       )\ )\()|()/(  (    (()/(  )\ (()/(
-        //      )\  )((_)\  ( )(_))(_))\    (((_|(_)\ /(_)) )\    /(_)|((_) /(_))
-        //     ((_)((_)((_)(_(_()|_))((_)   )\___ ((_|_))_ ((_)  (_)) )\___(_))
-        //     __   _____ _____ ___ ___    ___ ___  ___  ___   ___ ___ ___   _
-        //     \ \ / / _ \_   _| _ \ __|  / __/ _ \|   \| __| |_ _/ __|_ _| | |
-        //      \ V / (_) || | |   / _|  | (_| (_) | |) | _|   | | (__ | |  |_|
-        //       \_/ \___/ |_| |_|_\___|  \___\___/|___/|___| |___\___|___| (_)
-        //
+    DateTimeFormatter formatteur = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    String dateFormatee = date.format(formatteur);
+    return dateFormatee;
     }
 }

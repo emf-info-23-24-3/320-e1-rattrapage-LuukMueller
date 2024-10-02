@@ -2,8 +2,13 @@ package services;
 
 public class ServiceFormatageNomOiseau {
 
-
-    //Votre javadoc ici, selon le cahier des charges du fichier README, chapitre Javadoc.
+    /*
+     * Formate une nom de oiseau composé de deux mots séparé par un espace.
+     * Remplacez l'espace pau un underscore si les deux mots ne sont pas separe ou
+     * si le attribut fournie est egale a null cette méthode doit retourne
+     * "entrée incorrecte"
+     * @return String formate en forme de "partieNom1_partieNom2"
+     */
 
     public String formatterNomOiseau(String nomOiseau) {
 

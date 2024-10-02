@@ -2,28 +2,22 @@ package services;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import models.Observation;
 
 public class ServiceIndexationObservations {
-
-
+    HashMap<String, ArrayList<Observation>> parNomCommun;
+    HashMap<LocalDate, ArrayList<Observation>> parDate;
+    HashMap<LocalDate, HashMap<String, ArrayList<Observation>>> parNomCommunEtDate;
 
     /**
      * Constructeur, initialise les attributs de la classe.
      */
     public ServiceIndexationObservations() {
-        //
-        //               )        (                 ) (           (         (
-        //            ( /(   *   ))\ )        (  ( /( )\ )        )\ )  (   )\ )
-        //      (   ( )\())` )  /(()/((       )\ )\()|()/(  (    (()/(  )\ (()/(
-        //      )\  )((_)\  ( )(_))(_))\    (((_|(_)\ /(_)) )\    /(_)|((_) /(_))
-        //     ((_)((_)((_)(_(_()|_))((_)   )\___ ((_|_))_ ((_)  (_)) )\___(_))
-        //     __   _____ _____ ___ ___    ___ ___  ___  ___   ___ ___ ___   _
-        //     \ \ / / _ \_   _| _ \ __|  / __/ _ \|   \| __| |_ _/ __|_ _| | |
-        //      \ V / (_) || | |   / _|  | (_| (_) | |) | _|   | | (__ | |  |_|
-        //       \_/ \___/ |_| |_|_\___|  \___\___/|___/|___| |___\___|___| (_)
-        //
+        parDate = new HashMap<>();
+        parNomCommun = new HashMap<>();
+        parNomCommunEtDate = new HashMap<>();
     }
 
     /**
@@ -49,17 +43,44 @@ public class ServiceIndexationObservations {
      * @param observation l'observation à indexer
      */
     public void indexerObservation(Observation observation) {
-        //
-        //               )        (                 ) (           (         (
-        //            ( /(   *   ))\ )        (  ( /( )\ )        )\ )  (   )\ )
-        //      (   ( )\())` )  /(()/((       )\ )\()|()/(  (    (()/(  )\ (()/(
-        //      )\  )((_)\  ( )(_))(_))\    (((_|(_)\ /(_)) )\    /(_)|((_) /(_))
-        //     ((_)((_)((_)(_(_()|_))((_)   )\___ ((_|_))_ ((_)  (_)) )\___(_))
-        //     __   _____ _____ ___ ___    ___ ___  ___  ___   ___ ___ ___   _
-        //     \ \ / / _ \_   _| _ \ __|  / __/ _ \|   \| __| |_ _/ __|_ _| | |
-        //      \ V / (_) || | |   / _|  | (_| (_) | |) | _|   | | (__ | |  |_|
-        //       \_/ \___/ |_| |_|_\___|  \___\___/|___/|___| |___\___|___| (_)
-        //
+        if (observation != null) {
+            ArrayList<Observation> observationsParNomCommun = new ArrayList<>();
+            String cle = observation.getNomCommun();
+            if (parNomCommun.containsKey(cle)) {
+                parNomCommun.get(cle).add(observation);
+            } else {
+                observationsParNomCommun.add(observation);
+                parNomCommun.put(cle, observationsParNomCommun);
+            }
+        }
+
+        if (observation != null) {
+            ArrayList<Observation> observationsParDate = new ArrayList<>();
+            LocalDate dateDeObservation = observation.getDate();
+            if (parDate.containsKey(dateDeObservation)) {
+                parDate.get(dateDeObservation).add(observation);
+            } else {
+                observationsParDate.add(observation);
+                parDate.put(dateDeObservation, observationsParDate);
+            }
+        }
+
+        if (observation != null) {
+            String cle = observation.getNomCommun();
+            LocalDate dateDeObservation = observation.getDate();
+            ArrayList<Observation> observationsParDateEtNomCommun = new ArrayList<>();
+            HashMap<String, ArrayList<Observation>> mapNomCommuneEtDonnees = new HashMap();
+            if (parNomCommunEtDate.containsKey(dateDeObservation)) {
+                if (parNomCommunEtDate.get(dateDeObservation).containsKey(cle)) {
+                    parNomCommunEtDate.get(dateDeObservation).get(cle).add(observation);
+                } else {
+                    observationsParDateEtNomCommun.add(observation);
+                    mapNomCommuneEtDonnees.put(cle, observationsParDateEtNomCommun);
+                    parNomCommunEtDate.put(dateDeObservation, mapNomCommuneEtDonnees);
+                }
+            }
+        }
+
     }
 
     /**
@@ -71,17 +92,11 @@ public class ServiceIndexationObservations {
      * @return la liste des observations
      */
     public ArrayList<Observation> getObservationsParNomCommun(String nomCommun) {
-        //
-        //               )        (                 ) (           (         (
-        //            ( /(   *   ))\ )        (  ( /( )\ )        )\ )  (   )\ )
-        //      (   ( )\())` )  /(()/((       )\ )\()|()/(  (    (()/(  )\ (()/(
-        //      )\  )((_)\  ( )(_))(_))\    (((_|(_)\ /(_)) )\    /(_)|((_) /(_))
-        //     ((_)((_)((_)(_(_()|_))((_)   )\___ ((_|_))_ ((_)  (_)) )\___(_))
-        //     __   _____ _____ ___ ___    ___ ___  ___  ___   ___ ___ ___   _
-        //     \ \ / / _ \_   _| _ \ __|  / __/ _ \|   \| __| |_ _/ __|_ _| | |
-        //      \ V / (_) || | |   / _|  | (_| (_) | |) | _|   | | (__ | |  |_|
-        //       \_/ \___/ |_| |_|_\___|  \___\___/|___/|___| |___\___|___| (_)
-        //
+        ArrayList<Observation> resultat = new ArrayList<>();
+        if (parNomCommun.containsKey(nomCommun)) {
+            resultat = parNomCommun.get(nomCommun);
+        }
+        return resultat;
     }
 
     /**
@@ -91,17 +106,11 @@ public class ServiceIndexationObservations {
      * @return la liste des observations
      */
     public ArrayList<Observation> getObservationsParDate(LocalDate date) {
-        //
-        //               )        (                 ) (           (         (
-        //            ( /(   *   ))\ )        (  ( /( )\ )        )\ )  (   )\ )
-        //      (   ( )\())` )  /(()/((       )\ )\()|()/(  (    (()/(  )\ (()/(
-        //      )\  )((_)\  ( )(_))(_))\    (((_|(_)\ /(_)) )\    /(_)|((_) /(_))
-        //     ((_)((_)((_)(_(_()|_))((_)   )\___ ((_|_))_ ((_)  (_)) )\___(_))
-        //     __   _____ _____ ___ ___    ___ ___  ___  ___   ___ ___ ___   _
-        //     \ \ / / _ \_   _| _ \ __|  / __/ _ \|   \| __| |_ _/ __|_ _| | |
-        //      \ V / (_) || | |   / _|  | (_| (_) | |) | _|   | | (__ | |  |_|
-        //       \_/ \___/ |_| |_|_\___|  \___\___/|___/|___| |___\___|___| (_)
-        //
+        ArrayList<Observation> resultat = new ArrayList<>();
+        if (parDate.containsKey(date)) {
+            resultat = parDate.get(date);
+        }
+        return resultat;
     }
 
     /**
@@ -113,17 +122,13 @@ public class ServiceIndexationObservations {
      * @return la liste des observations
      */
     public ArrayList<Observation> getObservationsParNomCommunEtDate(String nomCommun, LocalDate date) {
-        //
-        //               )        (                 ) (           (         (
-        //            ( /(   *   ))\ )        (  ( /( )\ )        )\ )  (   )\ )
-        //      (   ( )\())` )  /(()/((       )\ )\()|()/(  (    (()/(  )\ (()/(
-        //      )\  )((_)\  ( )(_))(_))\    (((_|(_)\ /(_)) )\    /(_)|((_) /(_))
-        //     ((_)((_)((_)(_(_()|_))((_)   )\___ ((_|_))_ ((_)  (_)) )\___(_))
-        //     __   _____ _____ ___ ___    ___ ___  ___  ___   ___ ___ ___   _
-        //     \ \ / / _ \_   _| _ \ __|  / __/ _ \|   \| __| |_ _/ __|_ _| | |
-        //      \ V / (_) || | |   / _|  | (_| (_) | |) | _|   | | (__ | |  |_|
-        //       \_/ \___/ |_| |_|_\___|  \___\___/|___/|___| |___\___|___| (_)
-        //
-    }
+        ArrayList<Observation> resultat = new ArrayList<>();
+        if (parNomCommunEtDate.containsKey(date)) {
+            if (parNomCommunEtDate.get(date).containsKey(nomCommun)) {
+                resultat = parNomCommunEtDate.get(date).get(nomCommun);
+            }
+        }
+        return resultat;
 
+    }
 }
